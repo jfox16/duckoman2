@@ -1,5 +1,5 @@
 {
-    "id": "c0fa683d-0d59-46fe-8e9a-aad1ffd072f6",
+    "id": "c8ae8112-ee7d-4b38-9bc5-2abc4d9eb7af",
     "modelName": "GMObject",
     "mvc": "1.0",
     "name": "obj_change_room",
@@ -20,40 +20,11 @@
     "physicsRestitution": 0.1,
     "physicsSensor": false,
     "physicsShape": 1,
-    "physicsShapePoints": [
-        {
-            "id": "042869ab-dab2-42a0-8f0d-abade2a295f0",
-            "modelName": "GMPoint",
-            "mvc": "1.0",
-            "x": 0,
-            "y": 0
-        },
-        {
-            "id": "043d9560-e212-4638-bc0c-91bebaf16108",
-            "modelName": "GMPoint",
-            "mvc": "1.0",
-            "x": 32,
-            "y": 0
-        },
-        {
-            "id": "d4d0bbbc-a1ce-4b6c-bc37-e39a64216d9c",
-            "modelName": "GMPoint",
-            "mvc": "1.0",
-            "x": 32,
-            "y": 32
-        },
-        {
-            "id": "ad82f558-2d80-492c-89ac-1bd64fd3df17",
-            "modelName": "GMPoint",
-            "mvc": "1.0",
-            "x": 0,
-            "y": 32
-        }
-    ],
+    "physicsShapePoints": null,
     "physicsStartAwake": true,
     "properties": [
         {
-            "id": "648b65f0-9604-40d5-8de3-5531094fcf68",
+            "id": "cf36aaf8-3b4d-4a45-b351-f5b3a1e7dbf5",
             "modelName": "GMObjectProperty",
             "mvc": "1.0",
             "listItems": null,
@@ -67,7 +38,7 @@
             "varType": 5
         },
         {
-            "id": "fdad71fc-d905-419e-b654-c760a8ef5acc",
+            "id": "b19b0da8-f112-41af-8a78-32a981b23d4d",
             "modelName": "GMObjectProperty",
             "mvc": "1.0",
             "listItems": null,
@@ -76,12 +47,12 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "64",
+            "value": "-1",
             "varName": "destination_x",
             "varType": 1
         },
         {
-            "id": "5fd5c866-839a-4d90-9854-e532412ea270",
+            "id": "fbac4842-5992-4f3b-a830-094357c74bfd",
             "modelName": "GMObjectProperty",
             "mvc": "1.0",
             "listItems": null,
@@ -90,12 +61,12 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "64",
+            "value": "-1",
             "varName": "destination_y",
             "varType": 1
         }
     ],
     "solid": false,
-    "spriteId": "5285e4b7-06be-499d-b00c-d38d943727bd",
-    "visible": true
+    "spriteId": "f241e59d-3df2-41ab-b43a-7e390bba4277",
+    "visible": false
 }

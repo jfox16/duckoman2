@@ -2,8 +2,10 @@
  
 event_inherited();
 
+global.wingberry_got = true;
+
 // Movement Variables
-x_acceleration = 0.8;
+x_acceleration = 1;
 x_max_velocity = 5;
 x_drag = 1.5;
 
@@ -43,6 +45,10 @@ land_frames_max = 4;
 is_grounded = false;
 was_grounded = false;
 is_wall_sliding = false;
+was_wall_sliding = false;
+
+// Audio
+slide_sound = noone;
 
 
 points = 0;

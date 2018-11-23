@@ -1,4 +1,4 @@
-/// @function enter_location(location)
+/// @function enter_location(obj_location)
 /// @description Transitions room to location from worldmap.
 /// @param {real} instance_id of the location.
 

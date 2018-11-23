@@ -1,11 +1,13 @@
-/// @description Animate
+/// @description Animate and play looping sound
 
 // - Animate -
 // -----------
 
 if (is_grounded) {
-	if (!was_grounded)
+	if (!was_grounded) {
 		land_frames = land_frames_max;
+		audio_play_sound(snd_land, 0, false);
+	}
 		
 	if (land_frames > 0) {
 		sprite_index = spr_duck_land;
@@ -34,3 +36,15 @@ else{
 
 if (turn_frames == 0) 
 	image_xscale = (facing_right) ? 1 : -1;
+	
+// - Sounds -
+// ----------
+
+if (is_wall_sliding && y_velocity > 0) {
+	if (slide_sound == noone)
+		slide_sound = audio_play_sound(snd_slide, 0, true);
+}
+else {
+	audio_pause_sound(snd_slide);
+	slide_sound = noone;
+}

@@ -1,12 +1,5 @@
-/// @description Change Room
+/// @description Exit Location
 
-if position_meeting(x,y,other) && room_exists(other.destination_room) {
-	if (other.destination_room == rm_worldmap) {
-		exit_location(other);
-	}
-	else {
-		// not implemented
-	}
+if position_meeting(x, y, other) {
+	exit_location(self, other);
 }
-else if !room_exists(other.destination_room)
-	show_debug_message("Room incorrectly set");
