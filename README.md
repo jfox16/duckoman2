@@ -10,15 +10,15 @@ Play as duck, collect all the apples as fast as you can! Duck can slide on walls
 3. Run duckoman2.exe
 
 ## Controls:
-- Style A:
+### Style A:
   - WASD to Move
   - L to Jump
   - K to Dash
-- Style B:
+### Style B:
   - Arrow Keys to Move
   - Space to Jump
   - Left Alt to Dash
-- Style C:
+### Style C:
   - Arrow Keys to Move
   - Z to Jump
   - X to Dash
