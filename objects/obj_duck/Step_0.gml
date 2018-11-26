@@ -44,9 +44,7 @@ else if (
 
 // if no x input
 if ( global.input_x == 0 ) {
-	if ( abs(x_velocity) <= x_max_velocity ) {
-		x_velocity = 0;
-	}
+	x_velocity = 0;
 }
 else {
 	// left pressed
