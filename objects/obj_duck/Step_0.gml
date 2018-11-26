@@ -13,6 +13,8 @@ if (is_grounded) {
 	can_dash = true;
 }
 
+is_crouching = global.input_y > 0;
+
 // Check if player is wall sliding, and direction of wall slide
 was_wall_sliding = is_wall_sliding;
 is_wall_sliding = false;
@@ -38,51 +40,51 @@ else if (
 
 // - Determine X Movement -
 // ------------------------
-/* X movement is based on x input. Duck accelerates horizontally in 
-direction of input_x. If duck is grounded, drag is applied. */
+/* X movement is based on x input. */
 
-if (global.input_x != 0) {
-	// If turning, apply to facing_right and start turn frames
-	if ( global.input_x > 0 && !facing_right ) {
-		facing_right = true;
-		turn_frames = turn_frames_max; // for animation
-	}
-	else if ( global.input_x < 0 && facing_right ) {
-		facing_right = false;
-		turn_frames = turn_frames_max; // for animation
-	}
-
-	// Immediately stop if opposite direction is pressed
-	if (
-		( (x_velocity > 0 && global.input_x < 0) 
-		|| (x_velocity < 0 && global.input_x > 0) )
-		&& is_grounded && (abs(x_velocity) <= x_max_velocity) 
-	) {
+// if no x input
+if ( global.input_x == 0 ) {
+	if ( abs(x_velocity) <= x_max_velocity ) {
 		x_velocity = 0;
 	}
-
-	// accelerate x based on input
-	dx_velocity = global.input_x*x_acceleration;
-	if (!is_grounded) dx_velocity *= 1; // less control of velocity when airborne
-	
-	if ( abs(x_velocity) < x_max_velocity ) {
-		x_velocity = clamp(x_velocity+dx_velocity, -x_max_velocity, x_max_velocity);
+}
+else {
+	// left pressed
+	if ( global.input_x == -1 ) {
+		// if facing opposite direction
+		if (facing_right) {
+			if (is_grounded) x_velocity = 0;
+			facing_right = false;
+			turn_frames = turn_frames_max;
+		}
+		if (x_velocity >= -x_max_velocity) {
+			var new_x_velocity = x_velocity - x_acceleration;
+			x_velocity = max(new_x_velocity, -x_max_velocity);
+		}
 	}
+	// right pressed
 	else {
-		if ( (x_velocity > 0 && dx_velocity < 0)
-			|| (x_velocity < 0 && dx_velocity > 0) ) {
-			x_velocity += dx_velocity;	
+		// if facing opposite direction
+		if (!facing_right) {
+			if (is_grounded) x_velocity = 0;
+			facing_right = true;
+			turn_frames = turn_frames_max;
+		}
+		if (x_velocity <= x_max_velocity) {
+			var new_x_velocity = x_velocity + x_acceleration;
+			x_velocity = min(new_x_velocity, x_max_velocity);
 		}
 	}
 }
 
+if (is_crouching && is_grounded) x_velocity *= 0.5;
+
 // apply drag
-if ( 
-	( global.input_x == 0 || abs(x_velocity) > x_max_velocity )
-	&& is_grounded
-) {
-	if (x_velocity > 0) x_velocity = max(x_velocity - x_drag, 0);
-	else if (x_velocity < 0) x_velocity = min(x_velocity + x_drag, 0);
+if (is_grounded) {
+	if (x_velocity > x_max_velocity)
+		x_velocity = max(x_velocity-x_drag, 0);
+	else if (x_velocity < -x_max_velocity)
+		x_velocity = min(x_velocity+x_drag, 0);
 }
 
 // - Determine Y movement - 
@@ -96,16 +98,23 @@ if (jump_forgiveness_frames > 0) {
 	jump_forgiveness_frames--;
 	if (global.jump_pressed) {
 		y_velocity = -jump_speed;
-		jump_frames = jump_frames_max;
+		if (!is_crouching) jump_frames = jump_frames_max;
+		else jump_frames = 1;
 		jump_forgiveness_frames = 0;
-		audio_play_sound(snd_jump, 0, false);
+		audio_play_sound(snd_jump, 1, false);
 	}
 }
 
 // Check Jump held
 if (global.jump_held && jump_frames > 0) {
-	y_velocity = -jump_speed;
-	jump_frames--;
+	if ( place_meeting(x, y-1, obj_solid) ) {
+		y_velocity = 0;
+		jump_frames = 0;
+	}
+	else {
+		y_velocity = -jump_speed;
+		jump_frames--;
+	}
 }
 else {
 	// apply gravity
@@ -123,15 +132,15 @@ if (is_wall_sliding) {
 if ( !is_grounded && wall_jump_forgiveness_frames > 0 ) {
 	if (global.jump_pressed) {
 		if (wall_slide_on_right) {
-			x_velocity = -0.5*jump_speed;
-			y_velocity = -1.1*jump_speed;
+			x_velocity = -wall_jump_x_velocity;
+			y_velocity = -wall_jump_y_velocity;
 		}
 		else {
-			x_velocity = 0.5*jump_speed;
-			y_velocity = -1.1*jump_speed;
+			x_velocity = wall_jump_x_velocity;
+			y_velocity = -wall_jump_y_velocity;
 		}
 		wall_jump_forgiveness_frames = 0;
-		audio_play_sound(snd_jump, 0, false);
+		audio_play_sound(snd_jump, 1, false);
 	}
 	else wall_jump_forgiveness_frames--;
 }
@@ -189,7 +198,7 @@ if (
 	if (dash_x == 0) x_velocity = 0;
 	if (dash_y == 0) y_velocity = 0;
 	
-	audio_play_sound(snd_dash, 0, false);
+	audio_play_sound(snd_dash, 2, false);
 }
 if (dash_frames > 0) {
 	if (dash_x != 0) x_velocity = dash_x;

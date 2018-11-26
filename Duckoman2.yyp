@@ -583,6 +583,14 @@
             }
         },
         {
+            "Key": "b4732ab6-a37a-4418-9bfa-a5c053ddfe99",
+            "Value": {
+                "id": "8febc2a5-0297-4757-ad81-aa73951d5cd6",
+                "resourcePath": "sprites\\spr_duck_crouchmove\\spr_duck_crouchmove.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "b604bd8b-8b9f-4648-9c8f-5a9ef92df39e",
             "Value": {
                 "id": "c0c327fc-be59-4cf7-bc41-1fb798ee7090",
@@ -835,6 +843,14 @@
             "Value": {
                 "id": "26a612a5-e4a4-498e-b377-85e739ee19ca",
                 "resourcePath": "sprites\\tilespr_worldmap\\tilespr_worldmap.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "ff35c179-76e2-4a43-9cc6-f66f61b4eb37",
+            "Value": {
+                "id": "ba83fbaa-1d1c-47cc-97d4-f9d29e501c22",
+                "resourcePath": "sprites\\spr_duck_crouchjump\\spr_duck_crouchjump.yy",
                 "resourceType": "GMSprite"
             }
         }
